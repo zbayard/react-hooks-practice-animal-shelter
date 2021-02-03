@@ -1,24 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Pet() {
+function Pet({id, type, gender, age, weight, name, isAdopted, onAdoptPet}) {
+
+  const [adoptionStatus, setAdoptionStatus] = useState(false)
+  
+  function handleAdoption(id){
+    setAdoptionStatus(!adoptionStatus)
+    console.log(adoptionStatus)
+    console.log(id)
+    // would i call onAdoptPetHere?
+    
+
+  }
   return (
     <div className="card">
       <div className="content">
         <span className="header">
-          {/*'♀' OR '♂' */}
-          PET NAME
+          {gender === 'male' ? '♀' : '♂'}
+          {name}
         </span>
         <div className="meta">
-          <span className="date">PET TYPE</span>
+          <span className="date">{type}</span>
         </div>
         <div className="description">
-          <p>Age: PET AGE</p>
-          <p>Weight: PET WEIGHT</p>
+          <p>Age: {age}</p>
+          <p>Weight: {weight}</p>
+          
         </div>
       </div>
       <div className="extra content">
-        <button className="ui disabled button">Already adopted</button>
-        <button className="ui primary button">Adopt pet</button>
+        {isAdopted ? <button className="ui disabled button">Already adopted</button> : 
+        <button onClick={handleAdoption} className="ui primary button">Adopt pet</button>}
       </div>
     </div>
   );
